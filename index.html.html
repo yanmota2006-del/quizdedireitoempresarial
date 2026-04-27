@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🏢 30 Questões de Direito Empresarial | Quiz com Feedback e Dicas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1rem;
+            color: #1e2a32;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a3c2c 0%, #0f2a1e 100%);
+            border-radius: 2rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            color: white;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 1.9rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero h1 span {
+            background: #e9a23b;
+            font-size: 0.9rem;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.12);
+            border-radius: 28px;
+            padding: 0.7rem 1.5rem;
+            margin-top: 1rem;
+            backdrop-filter: blur(4px);
+            font-weight: 500;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .stats span {
+            font-weight: 700;
+            background: #e9a23b;
+            color: #1e2a32;
+            padding: 0 8px;
+            border-radius: 24px;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 1.6rem;
+            padding: 1.5rem 1.8rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            transition: all 0.1s;
+            border-left: 8px solid #2c7da0;
+        }
+
+        .quiz-card.correta {
+            border-left-color: #2a9d8f;
+            background: #f6fff8;
+        }
+
+        .quiz-card.errada {
+            border-left-color: #e76f51;
+            background: #fffaf5;
+        }
+
+        .pergunta-texto {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #0f2c3b;
+            line-height: 1.4;
+        }
+
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 1rem 0;
+        }
+
+        .opcao {
+            background: #f8fafc;
+            border-radius: 60px;
+            padding: 0.7rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #cbd5e1;
+            font-weight: 500;
+        }
+
+        .opcao:hover {
+            background: #e9edf2;
+            transform: translateX(4px);
+        }
+
+        .opcao.selected {
+            background: #2c7da0;
+            border-color: #0b3b4f;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .feedback-area {
+            margin-top: 18px;
+            background: #f1f5f9;
+            border-radius: 1.2rem;
+            padding: 1rem 1.2rem;
+            border-left: 5px solid #61a5c2;
+            animation: fadeIn 0.2s;
+        }
+
+        .feedback-area.correto {
+            background: #e0f2e9;
+            border-left-color: #2a9d8f;
+        }
+
+        .feedback-area.erro {
+            background: #ffe8e3;
+            border-left-color: #e76f51;
+        }
+
+        .feedback-title {
+            font-weight: 800;
+            margin-bottom: 6px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .dica-box {
+            margin-top: 12px;
+            background: #fff6e0;
+            padding: 8px 12px;
+            border-radius: 20px;
+            color: #b6570a;
+            font-size: 0.9rem;
+            border-left: 3px solid #f4b942;
+        }
+
+        button {
+            background: #2c7da0;
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1f5e7a;
+            transform: scale(0.97);
+        }
+
+        .reset-all {
+            background: #b23c1c;
+        }
+
+        .footer-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0 20px;
+        }
+
+        .small-note {
+            background: #e9ecef;
+            text-align: center;
+            border-radius: 1rem;
+            padding: 0.9rem;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        @media (max-width: 650px) {
+            .quiz-card {
+                padding: 1.2rem;
+            }
+            .pergunta-texto {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>🏢 30 QUESTÕES DE DIREITO EMPRESARIAL <span>Quiz + Comentários</span></h1>
+        <p>📘 Baseado no caderno e estudo dirigido: teoria da empresa, empresário, registro, nome empresarial, sociedades, estabelecimento, trespasse, desconsideração e muito mais. Clique na opção, veja por que errou e a dica para acertar na próxima tentativa.</p>
+        <div class="stats">
+            <div>📋 Respondidas: <strong id="respondidas-count">0</strong> / <span id="total-perguntas">30</span></div>
+            <div>✅ Acertos: <strong id="acertos-count">0</strong></div>
+            <div>🔄 Você pode refazer cada questão quantas vezes quiser</div>
+        </div>
+    </div>
+
+    <div id="quiz-container"></div>
+
+    <div class="footer-buttons">
+        <button class="reset-all" id="reset-all-btn">🔄 Reiniciar todas as respostas</button>
+    </div>
+    <div class="small-note">
+        💡 Cada resposta gera explicação imediata + dica de como acertar da próxima vez. Leia os comentários para fixar o conteúdo: art. 966 CC (empresário), teoria da empresa, registro na Junta Comercial, nome empresarial (firma/denominação), sociedade em comum, responsabilidade ilimitada, desconsideração da personalidade jurídica (art. 50 CC), trespasse e muito mais.
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // 30 QUESTÕES - DIREITO EMPRESARIAL (baseadas integralmente no caderno e estudo dirigido)
+    // Conteúdo: teoria da empresa, empresário, capacidade/impedimentos, registro, nome empresarial,
+    // estabelecimento, trespasse, tipos societários, sociedade em comum, desconsideração, etc.
+    // ============================================================
+    const questions = [
+        { // 1 - Conceito de empresário (art. 966)
+            text: "1. Nos termos do art. 966 do Código Civil, considera-se empresário quem:",
+            options: [
+                "Exerce atividade intelectual, científica ou artística, ainda que com auxiliares.",
+                "Exerce profissionalmente atividade econômica organizada para a produção ou circulação de bens ou serviços.",
+                "Pratica atos de comércio previstos em lei, independentemente de organização.",
+                "Possui registro na Junta Comercial e recolhe tributos federais."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 966 CC: 'Considera-se empresário quem exerce profissionalmente atividade econômica organizada para a produção ou circulação de bens ou de serviços.'",
+            tip: "📌 DICA: Elementos do empresário: profissionalismo (habitualidade), atividade econômica (lucro), organização (fatores de produção) e produção/circulação de bens/serviços."
+        },
+        { // 2 - Profissional intelectual
+            text: "2. Sobre o exercício da atividade por profissional intelectual (art. 966, parágrafo único, CC), assinale a CORRETA:",
+            options: [
+                "Nunca será considerado empresário, pois profissão intelectual é excluída da atividade empresarial.",
+                "Será empresário se o exercício da profissão constituir elemento de empresa (organização superar o aspecto intelectual).",
+                "Sempre será empresário se tiver registro na Junta Comercial.",
+                "Apenas médicos e engenheiros podem ser empresários, nunca advogados."
+            ],
+            correct: 1,
+            explanation: "✅ Parágrafo único do art. 966: 'Não se considera empresário quem exerce profissão intelectual, de natureza científica, literária ou artística, ainda como o concurso de auxiliares, salvo se o exercício da profissão constituir elemento de empresa.'",
+            tip: "⚡ DICA: Ex: arquiteto com 20 funcionários e múltiplas obras → elemento de empresa. Profissional liberal sozinho → não é empresário."
+        },
+        { // 3 - Teoria da empresa x atos de comércio
+            text: "3. O Código Civil de 2002 adotou a teoria da empresa, inspirada no Código Civil italiano de 1942. Isso significa que:",
+            options: [
+                "O direito empresarial ainda é baseado nos atos de comércio, como no Código Comercial de 1850.",
+                "O elemento central passou a ser o modo de exercício da atividade (profissional e organizada), não mais o objeto mercantil.",
+                "Apenas os comerciantes registrados na Junta Comercial estão sujeitos ao direito empresarial.",
+                "Atividades de prestação de serviços continuam excluídas do direito empresarial."
+            ],
+            correct: 1,
+            explanation: "✅ A teoria da empresa deslocou o foco do ato de comércio (objeto) para a atividade econômica organizada (modo de exercício), ampliando o alcance do direito empresarial.",
+            tip: "📖 DICA: Fases: 1) subjetiva (corporações de ofício); 2) objetiva (atos de comércio - Código Napoleônico); 3) teoria da empresa (Código Civil italiano/1942)."
+        },
+        { // 4 - Empresário individual x sociedade
+            text: "4. Sobre o empresário individual, é correto afirmar:",
+            options: [
+                "Possui personalidade jurídica distinta da sua pessoa natural, com patrimônio separado.",
+                "Responde com todo o seu patrimônio pessoal pelas dívidas da atividade, salvo bem de família.",
+                "Nunca pode ser MEI (Microempreendedor Individual).",
+                "A responsabilidade é limitada ao capital investido no negócio."
+            ],
+            correct: 1,
+            explanation: "✅ Empresário individual não tem personalidade jurídica separada; responde ilimitadamente com seu patrimônio pessoal, ressalvado o bem de família (Lei 8.009/90).",
+            tip: "💰 DICA: Risco central do empresário individual = responsabilidade ilimitada. Credores podem penhorar bens particulares."
+        },
+        { // 5 - Registro empresarial: natureza
+            text: "5. Sobre o registro do empresário individual e da sociedade empresária, é correto:",
+            options: [
+                "Ambos têm natureza constitutiva, pois a personalidade jurídica nasce com o registro.",
+                "O registro do empresário individual é declaratório; o da sociedade empresária é constitutivo da personalidade jurídica.",
+                "O registro da sociedade empresária é meramente declaratório, pois a personalidade já existe antes.",
+                "O empresário individual não precisa de registro na Junta Comercial."
+            ],
+            correct: 1,
+            explanation: "✅ Empresário individual já exerce atividade antes do registro (efeito declaratório). A sociedade empresária adquire personalidade jurídica com o arquivamento do contrato social na Junta Comercial (art. 45 CC).",
+            tip: "🏛️ DICA: Art. 45 CC: 'Começa a existência legal das pessoas jurídicas de direito privado com a inscrição do ato constitutivo'."
+        },
+        { // 6 - Impedidos de exercer empresa
+            text: "6. Nos termos do art. 972 CC e legislação extravagante, NÃO pode exercer atividade empresária:",
+            options: [
+                "Menor de 18 anos não emancipado, com autorização dos pais.",
+                "Servidor público federal em atividade, pois há vedação legal (Lei 8.112/90).",
+                "Estrangeiro residente no Brasil, com visto permanente.",
+                "Falido reabilitado judicialmente."
+            ],
+            correct: 1,
+            explanation: "✅ Lei 8.112/90, art. 117, X: veda ao servidor público federal 'comerciar' (exercer atividade empresária). Magistrados, membros do MP e militares da ativa também são impedidos.",
+            tip: "⚠️ DICA: Incapacidade civil (menor, interdito) permite continuidade de empresa por representante. Impedimento legal (servidor, falido não reabilitado) é sanção de direito público."
+        },
+        { // 7 - Nome empresarial: firma x denominação
+            text: "7. Assinale a alternativa que diferencia CORRETAMENTE firma e denominação:",
+            options: [
+                "Firma é baseada no objeto social; denominação é baseada no nome dos sócios.",
+                "Firma é baseada no nome civil do empresário ou sócios; denominação é baseada em elemento fantasia ou objeto social.",
+                "A firma é usada apenas por sociedades anônimas; a denominação por limitadas.",
+                "Firma e denominação são sinônimos, podendo ser usados indistintamente."
+            ],
+            correct: 1,
+            explanation: "✅ Arts. 1.155 a 1.168 CC: firma (razão social) usa nome civil dos sócios; denominação usa elemento fantasia ou objeto social, com tipo societário.",
+            tip: "📛 DICA: Ex: 'Silva & Souza Ltda.' (firma); 'Alfa Tecnologia S.A.' (denominação). Empresário individual só pode usar firma."
+        },
+        { // 8 - Princípio da novidade (unicidade)
+            text: "8. O princípio da novidade (ou unicidade) do nome empresarial, previsto no art. 1.163 CC, significa:",
+            options: [
+                "O nome deve ser verdadeiro, refletindo a real atividade exercida.",
+                "É vedado registro de nome idêntico ou que induza a confusão com outro já registrado na mesma Junta Comercial.",
+                "O nome empresarial tem proteção em todo território nacional automaticamente.",
+                "O nome não pode conter palavras em idioma estrangeiro."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1.163 CC: 'A firma ou denominação registrada não pode ser usada por outro empresário ou sociedade, no mesmo Estado, se for idêntica ou semelhante a outra já registrada.'",
+            tip: "🗺️ DICA: Proteção territorial: apenas no Estado da Junta. Para proteção nacional, é necessário registrar a marca no INPI."
+        },
+        { // 9 - Estabelecimento empresarial (arts. 1.142 a 1.149)
+            text: "9. O estabelecimento empresarial (arts. 1.142 a 1.149 CC) é conceituado como:",
+            options: [
+                "O imóvel onde a empresa funciona (ponto comercial).",
+                "A pessoa jurídica que exerce a atividade econômica.",
+                "O complexo de bens organizado para o exercício da empresa, incluindo bens materiais e imateriais.",
+                "O capital social integralizado pelos sócios."
+            ],
+            correct: 2,
+            explanation: "✅ Art. 1.142 CC: 'Considera-se estabelecimento todo complexo de bens organizado, para exercício da empresa, por empresário, ou por sociedade empresária.'",
+            tip: "🏪 DICA: Estabelecimento (azienda, fundo de empresa) ≠ ponto (local físico). É universalidade de fato (art. 90 CC)."
+        },
+        { // 10 - Trespasse (alienação do estabelecimento)
+            text: "10. No contrato de trespasse (alienação do estabelecimento empresarial), o adquirente:",
+            options: [
+                "Não responde por nenhuma dívida anterior, mesmo que contabilizada.",
+                "Responde pelos débitos anteriores regularmente contabilizados, salvo estipulação em contrário (mas esta não oponível a credores).",
+                "Responde apenas se houver cláusula expressa no contrato de alienação.",
+                "Nunca responde, pois as dívidas acompanham o alienante."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1.145 CC: 'O adquirente do estabelecimento responde pelo pagamento dos débitos anteriores à transferência, desde que regularmente contabilizados, continuando o alienante solidariamente responsável pelo prazo de um ano.'",
+            tip: "💰 DICA: Alienante e adquirente respondem solidariamente por 1 ano (débitos vencidos) ou 1 ano após vencimento (vincendos). Natureza cogente."
+        },
+        { // 11 - Desconsideração da personalidade jurídica (art. 50)
+            text: "11. A teoria maior da desconsideração da personalidade jurídica (art. 50 CC) exige para sua aplicação:",
+            options: [
+                "Apenas a insolvência da sociedade, independentemente de abuso.",
+                "Desvio de finalidade ou confusão patrimonial, caracterizando abuso da personalidade jurídica.",
+                "Simples inadimplemento contratual, sem necessidade de prova de abuso.",
+                "A prática de ato ilícito penal pelo administrador."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 50 CC: desconsideração ocorre quando houver desvio de finalidade ou confusão patrimonial (abuso da personalidade jurídica). Teoria maior exige abuso.",
+            tip: "⚖️ DICA: Teoria menor (art. 28 CDC) exige apenas o dano e a impossibilidade de reparação, aplicável ao Direito do Consumidor e Ambiental."
+        },
+        { // 12 - Sociedade em comum (arts. 986-990)
+            text: "12. Sobre a sociedade em comum (arts. 986 a 990 CC), é correto afirmar:",
+            options: [
+                "Possui personalidade jurídica desde a assinatura do contrato social.",
+                "Os sócios respondem solidária e ilimitadamente, mas o sócio que não contratou tem benefício de ordem.",
+                "É uma sociedade regularizada, com registro na Junta Comercial.",
+                "O contrato social pode ser oposto a terceiros para limitar a responsabilidade."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 990 CC: 'Os sócios respondem solidária e ilimitadamente pelas obrigações sociais, excluído do benefício de ordem aquele que contratou pela sociedade.'",
+            tip: "📋 DICA: Sociedade em comum = sociedade não registrada (irregular). Benefício de ordem: credor deve esgotar bens da sociedade antes de ir contra os sócios que não contrataram."
+        },
+        { // 13 - Sociedade limitada (Ltda.)
+            text: "13. Na sociedade limitada (Ltda.), a responsabilidade dos sócios é:",
+            options: [
+                "Ilimitada e solidária, como na sociedade em nome coletivo.",
+                "Limitada ao valor de suas quotas, mas todos respondem solidariamente pela integralização.",
+                "Limitada ao valor de suas quotas, com responsabilidade subsidiária pela integralização das quotas de outros sócios.",
+                "Limitada ao capital social integralizado, sem qualquer responsabilidade pessoal."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1.052 CC: 'Na sociedade limitada, a responsabilidade de cada sócio é restrita ao valor de suas quotas, mas todos respondem solidariamente pela integralização do capital social.'",
+            tip: "🏢 DICA: A responsabilidade é limitada, mas há solidariedade pela integralização (art. 1.052, parágrafo único)."
+        },
+        { // 14 - Capacidade do menor e emancipação
+            text: "14. Um menor de 17 anos, emancipado por sentença judicial, pode ser empresário?",
+            options: [
+                "Não, pois menor de 18 anos jamais pode exercer atividade empresária.",
+                "Sim, pois a emancipação confere capacidade civil plena para todos os atos, inclusive empresariais.",
+                "Sim, mas apenas com autorização judicial e assistência dos pais.",
+                "Não, pois o exercício de empresa exige idade mínima de 21 anos."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 5º, parágrafo único, CC: emancipação confere capacidade plena. O menor emancipado pode ser empresário (art. 974 CC permite continuação; emancipado pode iniciar).",
+            tip: "👨‍💼 DICA: Menor de 16 anos não pode (incapaz absoluto). Entre 16 e 18, com assistência. Emancipado = capacidade plena."
+        },
+        { // 15 - Sociedade em conta de participação
+            text: "15. A sociedade em conta de participação (arts. 991 a 996 CC):",
+            options: [
+                "Tem personalidade jurídica e registro na Junta Comercial.",
+                "Não tem personalidade jurídica; é um contrato de investimento com sócio ostensivo (responsável ilimitado) e sócio oculto.",
+                "É o mesmo que sociedade em comum, podendo ser registrada posteriormente.",
+                "Todos os sócios respondem ilimitadamente perante terceiros."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 991 CC: 'Na sociedade em conta de participação, a atividade constitutiva do objeto social é exercida unicamente pelo sócio ostensivo, em seu nome individual, sob sua responsabilidade.' Sócio oculto não figura perante terceiros.",
+            tip: "🤫 DICA: Sociedade secreta. Sócio ostensivo responde ilimitadamente; sócio oculto responde apenas perante o ostensivo, na forma do contrato."
+        },
+        { // 16 - EIRELI e SLU (2019)
+            text: "16. Sobre a Sociedade Limitada Unipessoal (SLU), introduzida pela Lei 13.874/2019, é correto:",
+            options: [
+                "Permite apenas um sócio, mas o capital social deve ser de no mínimo 100 salários-mínimos.",
+                "Permite um único sócio (pessoa natural ou jurídica), com responsabilidade limitada ao capital social, sem exigência de capital mínimo.",
+                "É vedada para empresários individuais, que devem obrigatoriamente usar EIRELI.",
+                "A SLU não possui personalidade jurídica, diferentemente da EIRELI."
+            ],
+            correct: 1,
+            explanation: "✅ SLU (art. 1.052-A CC) permite sociedade limitada com um único sócio, sem capital mínimo, com responsabilidade limitada. Substituiu a EIRELI na prática.",
+            tip: "🏛️ DICA: EIRELI exigia capital mínimo de 100 salários-mínimos. SLU não exige, sendo mais acessível."
+        },
+        { // 17 - Alienação do estabelecimento e credores
+            text: "17. No trespasse, se o alienante não conservar bens suficientes para pagar seus credores:",
+            options: [
+                "O negócio é automaticamente nulo.",
+                "O trespasse não produz efeitos perante os credores antes do pagamento das dívidas ou consentimento expresso/tácito destes.",
+                "O adquirente pode se recusar a pagar, independentemente de qualquer condição.",
+                "Os credores perdem o direito de cobrar após a alienação."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1.145 CC: 'Se o alienante não conservar bens suficientes para solver o seu passivo, a alienação não terá eficácia em relação aos credores, sem o pagamento das dívidas ou o consentimento deles.'",
+            tip: "⚠️ DICA: Prazo de 30 dias para pagamento ou consentimento. Sem isso, credor pode pedir falência (art. 94, Lei 11.101/05)."
+        },
+        { // 18 - Sucessão empresarial (art. 1.146 CC)
+            text: "18. A transferência das dívidas do alienante para o adquirente no trespasse, nos termos do art. 1.146 CC:",
+            options: [
+                "Ocorre apenas se houver cláusula expressa no contrato.",
+                "É automática, de natureza cogente, não podendo ser afastada pelo contrato (cláusula contrária não produz efeitos).",
+                "Depende de autorização judicial.",
+                "Nunca ocorre, pois as dívidas permanecem com o alienante."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1.146 CC: 'O adquirente do estabelecimento responde pelo pagamento das dívidas anteriores, regularmente contabilizadas, a partir da averbação do trespasse.' Norma cogente.",
+            tip: "📜 DICA: Alienante e adquirente solidários por 1 ano. Cláusula que afaste a responsabilidade é ineficaz perante credores (validade apenas entre as partes)."
+        },
+        { // 19 - Sociedade anônima (SA)
+            text: "19. A sociedade anônima (Lei 6.404/76) se caracteriza por:",
+            options: [
+                "Responsabilidade ilimitada dos acionistas, como na sociedade em nome coletivo.",
+                "Capital dividido em ações, responsabilidade limitada ao preço das ações subscritas ou adquiridas.",
+                "Não pode ter seu capital dividido em valores mobiliários.",
+                "Somente pode ser aberta, nunca fechada."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1º da Lei 6.404/76: 'A companhia ou sociedade anônima terá o capital dividido em ações, e a responsabilidade dos sócios ou acionistas será limitada ao preço de emissão das ações subscritas ou adquiridas.'",
+            tip: "📈 DICA: SA pode ser aberta (mercado de capitais) ou fechada. Órgãos: Assembleia Geral, Conselho de Administração e Diretoria."
+        },
+        { // 20 - Cláusula leonina
+            text: "20. A cláusula leonina, prevista no art. 1.008 CC, é:",
+            options: [
+                "Permitida se todos os sócios concordarem expressamente.",
+                "Vedada, pois exclui algum sócio da participação nos lucros.",
+                "Obrigatória nas sociedades limitadas.",
+                "A cláusula que estabelece a administração conjunta."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1.008 CC: 'É nula a estipulação que exclui qualquer sócio de participar dos lucros ou das perdas.' Vedação absoluta à cláusula leonina.",
+            tip: "⚖️ DICA: Princípio da isonomia entre sócios. Não se pode excluir alguém dos lucros nem exonerar das perdas."
+        },
+        { // 21 - MEI (Microempreendedor Individual)
+            text: "21. O Microempreendedor Individual (MEI), regulado pela LC 123/2006, é:",
+            options: [
+                "Uma sociedade limitada unipessoal, com regime tributário especial.",
+                "Uma categoria simplificada de empresário individual, com limites de faturamento (R$ 81.000/ano) e atividades permitidas.",
+                "Uma sociedade anônima com tributação reduzida.",
+                "Uma cooperativa de crédito."
+            ],
+            correct: 1,
+            explanation: "✅ MEI é empresário individual com regime tributário simplificado (SIMEI), faturamento máximo de R$ 81.000/ano, contratação de até 1 empregado, e atividades permitidas.",
+            tip: "📊 DICA: MEI não tem responsabilidade limitada (responde com patrimônio pessoal). Última atualização do limite acompanhar a legislação."
+        },
+        { // 22 - Alteração contratual e registro
+            text: "22. A alteração do contrato social de uma sociedade limitada produz efeitos perante terceiros:",
+            options: [
+                "Imediatamente após a assinatura pelos sócios.",
+                "Somente após o arquivamento na Junta Comercial e a publicação, se exigível.",
+                "Nunca, pois a alteração só interessa aos sócios.",
+                "Apenas após trânsito em julgado de ação judicial."
+            ],
+            correct: 1,
+            explanation: "✅ Princípio da publicidade: atos societários só produzem efeitos perante terceiros após arquivamento na Junta Comercial (art. 1.154 CC).",
+            tip: "📑 DICA: Enquanto não arquivada, a alteração é ineficaz contra terceiros, mas pode valer entre os sócios."
+        },
+        { // 23 - Desconsideração inversa
+            text: "23. A desconsideração inversa da personalidade jurídica ocorre quando:",
+            options: [
+                "Os bens do sócio respondem por dívidas da sociedade.",
+                "Os bens da sociedade respondem por dívidas pessoais do sócio (ex: sócio transfere bens para PJ para fraudar credores).",
+                "A sociedade é desconsiderada por falta de registro.",
+                "A personalidade jurídica é estendida a terceiros não sócios."
+            ],
+            correct: 1,
+            explanation: "✅ Desconsideração inversa: credor pessoal do sócio atinge bens da sociedade. Reconhecida pelo STJ e pelo CPC/2015 (art. 133, §2º).",
+            tip: "🔄 DICA: Exemplo: sócio transfere imóvel para empresa para não pagar dívida pessoal. Juiz pode desconsiderar inversamente."
+        },
+        { // 24 - Sociedade cooperativa
+            text: "24. A sociedade cooperativa (Lei 5.764/71 e art. 1.094 CC) caracteriza-se por:",
+            options: [
+                "Ter capital dividido em ações negociáveis em bolsa.",
+                "Não ter objetivo de lucro (visa prestar serviços aos cooperados), podendo ter ato cooperativo e ato não cooperativo.",
+                "Responsabilidade ilimitada de todos os cooperados.",
+                "Ser necessariamente registrada na Junta Comercial."
+            ],
+            correct: 1,
+            explanation: "✅ Cooperativa não tem fins lucrativos (resultado é distribuído proporcionalmente às operações). Registro em órgão próprio (OCB ou Cartório de PJ), não na Junta Comercial.",
+            tip: "🤝 DICA: Ato cooperativo não é ato de comércio. Cooperativa pode praticar atos não cooperativos, sujeitos à tributação."
+        },
+        { // 25 - Sociedade em nome coletivo
+            text: "25. Na sociedade em nome coletivo, a responsabilidade dos sócios é:",
+            options: [
+                "Limitada ao valor de suas quotas.",
+                "Ilimitada e solidária, subsidiária em relação à sociedade.",
+                "Apenas solidária, mas limitada ao capital social.",
+                "Exclusiva do sócio administrador."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1.039 CC: 'Na sociedade em nome coletivo, todos os sócios respondem solidária e ilimitadamente pelas obrigações sociais.' É o tipo de responsabilidade máxima.",
+            tip: "⚠️ DICA: Tipo societário pouco utilizado devido à responsabilidade ilimitada. Usa firma social."
+        },
+        { // 26 - Livros empresariais obrigatórios
+            text: "26. São livros obrigatórios para o empresário e a sociedade empresária, conforme o Código Civil:",
+            options: [
+                "Livro Diário e Livro de Registro de Duplicatas.",
+                "Livro Diário (art. 1.180 CC) e, para as sociedades limitadas, o Livro de Atas e o Livro de Registro de Sócios.",
+                "Apenas o Livro Caixa.",
+                "Nenhum livro é obrigatório; apenas declaração fiscal."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1.180 CC: 'O empresário e a sociedade empresária são obrigados a seguir um sistema de contabilidade, com escrituração uniforme de seus livros.' Livro Diário é obrigatório; livros fiscais são previstos em legislação tributária.",
+            tip: "📚 DICA: Livros obrigatórios: Diário, Atas (assembleias), Registro de Sócios (Ltda.). A falta gera penalidades e pode induzir presunção contra o empresário."
+        },
+        { // 27 - Preposição mercantil (arts. 1170-1177)
+            text: "27. O preposto (gerente) no direito empresarial, nos termos dos arts. 1.170 a 1.177 CC:",
+            options: [
+                "É um sócio que administra a sociedade sem procuração.",
+                "É a pessoa que, no exercício da empresa, pratica atos de gestão em nome do empresário, com poderes gerais ou específicos.",
+                "Sempre responde pessoalmente pelas obrigações contraídas, ainda que agindo no interesse da empresa.",
+                "Não precisa de instrumento de procuraça."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1.170 CC: 'O preposto, salvo autorização expressa, não pode negociar por conta própria ou de outrem, nem participar nos resultados do negócio do preponente.' Prepoto = gerente com poderes.",
+            tip: "👔 DICA: A responsabilidade do preposto perante terceiros é do preponente (empresário). Atos dentro dos limites da procuração vinculam o preponente."
+        },
+        { // 28 - Baixa da empresa
+            text: "28. A baixa do registro do empresário ou da sociedade empresária na Junta Comercial:",
+            options: [
+                "Ocorre automaticamente com o encerramento das atividades.",
+                "Depende de requerimento, prova de quitação de tributos (certidão negativa) e observância do procedimento de liquidação.",
+                "Não é necessária, pois o CNPJ pode ser suspenso.",
+                "Pode ser feita a qualquer tempo, independentemente de débitos."
+            ],
+            correct: 1,
+            explanation: "✅ A baixa é ato voluntário e depende da regularidade fiscal (certidão conjunta da Receita Federal, Estadual e Municipal) e da comprovação de inexistência de débitos ou de regularidade.",
+            tip: "📉 DICA: Empresa irregular sem baixa continua sujeita a obrigações e o empresário individual responde por débitos. Baixa extingue a personalidade jurídica."
+        },
+        { // 29 - Empresário irregular (de fato)
+            text: "29. O empresário que exerce atividade empresária sem registro na Junta Comercial é chamado de:",
+            options: [
+                "Empresário regular.",
+                "Empresário irregular ou empresário de fato, sujeito às mesmas obrigações legais, mas sem os benefícios do registro.",
+                "Empresário individual com responsabilidade limitada.",
+                "Sociedade simples."
+            ],
+            correct: 1,
+            explanation: "✅ O empresário irregular responde com seu patrimônio pessoal (não há separação), não pode usar nome empresarial exclusivo, nem requerer recuperação judicial. Mas responde por obrigações.",
+            tip: "🏚️ DICA: A irregularidade não afasta a caracterização do empresário para fins de responsabilidade (art. 966 c/c art. 967 CC)."
+        },
+        { // 30 - Capital social e integralização
+            text: "30. Sobre a integralização do capital social nas sociedades limitadas, assinale a CORRETA:",
+            options: [
+                "O capital social é apenas declaratório, não precisando ser integralizado.",
+                "O capital deve ser integralizado em até 2 anos da constituição, sob pena de exclusão do sócio remisso (art. 1.004 CC).",
+                "Os bens dados em integralização não precisam de avaliação.",
+                "O sócio remisso perde apenas o direito a lucros, mas não pode ser excluído."
+            ],
+            correct: 1,
+            explanation: "✅ Art. 1.004 CC: 'Os sócios são obrigados à integralização de suas quotas, na forma e prazo previstos no contrato social.' O sócio remisso pode ser excluído judicialmente, ter suas quotas reduzidas ou sofrer perda de direitos.",
+            tip: "💰 DICA: Subscrever = adquirir quotas. Integralizar = pagar. O sócio que não integraliza (remisso) responde com seus bens pessoais pela dívida de capital."
+        }
+    ];
+
+    // estado
+    let responses = [];
+    const total = questions.length;
+    const quizContainer = document.getElementById("quiz-container");
+    const respondidasSpan = document.getElementById("respondidas-count");
+    const acertosSpan = document.getElementById("acertos-count");
+    const totalSpan = document.getElementById("total-perguntas");
+
+    function updateStats() {
+        const answered = responses.filter(r => r.answered).length;
+        const correct = responses.filter(r => r.isCorrect).length;
+        respondidasSpan.innerText = answered;
+        acertosSpan.innerText = correct;
+    }
+
+    function renderQuiz() {
+        quizContainer.innerHTML = "";
+        questions.forEach((q, idx) => {
+            const resp = responses[idx];
+            const selectedIdx = resp.selected;
+            const isAnswered = resp.answered;
+            const isCorrect = resp.isCorrect;
+
+            const card = document.createElement("div");
+            card.className = "quiz-card";
+            if (isAnswered) {
+                if (isCorrect) card.classList.add("correta");
+                else card.classList.add("errada");
+            }
+
+            const perguntaDiv = document.createElement("div");
+            perguntaDiv.className = "pergunta-texto";
+            perguntaDiv.innerText = q.text;
+
+            const opcoesDiv = document.createElement("div");
+            opcoesDiv.className = "opcoes";
+            q.options.forEach((opt, optIdx) => {
+                const optDiv = document.createElement("div");
+                optDiv.className = "opcao";
+                if (isAnswered && selectedIdx === optIdx) optDiv.classList.add("selected");
+                optDiv.innerText = `${String.fromCharCode(65+optIdx)}. ${opt}`;
+                optDiv.addEventListener("click", () => {
+                    const newCorrect = (optIdx === q.correct);
+                    const explanationText = newCorrect ? `✅ ${q.explanation}` : `❌ ${q.explanation}`;
+                    responses[idx] = {
+                        selected: optIdx,
+                        answered: true,
+                        isCorrect: newCorrect,
+                        feedback: explanationText,
+                        dica: q.tip
+                    };
+                    renderQuiz();
+                });
+                opcoesDiv.appendChild(optDiv);
+            });
+
+            card.appendChild(perguntaDiv);
+            card.appendChild(opcoesDiv);
+
+            if (isAnswered) {
+                const feedbackDiv = document.createElement("div");
+                feedbackDiv.className = "feedback-area";
+                if (isCorrect) feedbackDiv.classList.add("correto");
+                else feedbackDiv.classList.add("erro");
+
+                const titleSpan = document.createElement("div");
+                titleSpan.className = "feedback-title";
+                titleSpan.innerHTML = isCorrect ? "✔️ ACERTOU!" : "❌ ERROU - Por que errou?";
+                const textExp = document.createElement("div");
+                textExp.style.marginBottom = "6px";
+                textExp.innerText = resp.feedback || q.explanation;
+                const dicaEl = document.createElement("div");
+                dicaEl.className = "dica-box";
+                dicaEl.innerHTML = `💡 DICA PARA ACERTAR DA PRÓXIMA VEZ: ${resp.dica || q.tip}`;
+
+                feedbackDiv.appendChild(titleSpan);
+                feedbackDiv.appendChild(textExp);
+                feedbackDiv.appendChild(dicaEl);
+                card.appendChild(feedbackDiv);
+            }
+            quizContainer.appendChild(card);
+        });
+        updateStats();
+    }
+
+    function resetAll() {
+        responses = questions.map(q => ({
+            selected: null,
+            answered: false,
+            isCorrect: false,
+            feedback: "",
+            dica: q.tip
+        }));
+        renderQuiz();
+    }
+
+    totalSpan.innerText = total;
+    resetAll();
+    document.getElementById("reset-all-btn").addEventListener("click", resetAll);
+</script>
+</body>
+</html>
